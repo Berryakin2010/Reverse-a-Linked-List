@@ -1,0 +1,81 @@
+using System;
+
+public class ListNode
+{
+    public int Value;
+    public ListNode Next;
+
+    public ListNode(int value = 0, ListNode next = null)
+    {
+        Value = value;
+        Next = next;
+    }
+}
+
+public class LinkedList
+{
+    public ListNode Head;
+
+    public void Append(int value)
+    {
+        if (Head == null)
+        {
+            Head = new ListNode(value);
+        }
+        else
+        {
+            ListNode current = Head;
+            while (current.Next != null)
+            {
+                current = current.Next;
+            }
+            current.Next = new ListNode(value);
+        }
+    }
+
+    public void PrintList()
+    {
+        ListNode current = Head;
+        while (current != null)
+        {
+            Console.Write($"{current.Value} -> ");
+            current = current.Next;
+        }
+        Console.WriteLine("null");
+    }
+
+    public void Reverse()
+    {
+        ListNode prev = null;
+        ListNode current = Head;
+        while (current != null)
+        {
+            ListNode nextNode = current.Next;
+            current.Next = prev;
+            prev = current;
+            current = nextNode;
+        }
+        Head = prev;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        LinkedList ll = new LinkedList();
+        ll.Append(1);
+        ll.Append(2);
+        ll.Append(3);
+        ll.Append(4);
+        ll.Append(5);
+
+        Console.WriteLine("Original List:");
+        ll.PrintList();
+
+        ll.Reverse();
+
+        Console.WriteLine("Reversed List:");
+        ll.PrintList();
+    }
+}
