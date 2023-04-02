@@ -1,0 +1,52 @@
+#!/usr/bin/env/python3
+
+class ListNode:
+    def __init__(self, value=0, next=None):
+        self.value = value
+        self.next = next
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, value):
+        if not self.head:
+            self.head = ListNode(value)
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = ListNode(value)
+
+    def print_list(self):
+        current = self.head
+        while current:
+            print(current.value, end=" -> ")
+            current = current.next
+        print("None")
+
+    def reverse(self):
+        prev = None
+        current = self.head
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.head = prev
+
+# Example usage:
+ll = LinkedList()
+ll.append(1)
+ll.append(2)
+ll.append(3)
+ll.append(4)
+ll.append(5)
+
+print("Original List:")
+ll.print_list()
+
+ll.reverse()
+
+print("Reversed List:")
+ll.print_list()
